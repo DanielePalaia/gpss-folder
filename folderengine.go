@@ -2,22 +2,27 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/radovskyb/watcher"
 )
 
 type folderEngine struct {
-	path string
+	path        string
+	kafkaClient *kafkaEngine
 }
 
-func makeFolderEngine(path string) *folderEngine {
+func makeFolderEngine(path string, kafkaClient *kafkaEngine) *folderEngine {
 
 	engine := new(folderEngine)
 	engine.path = path
+	engine.kafkaClient = kafkaClient
+	engine.kafkaClient.Configure()
 	return engine
 }
 
@@ -73,6 +78,14 @@ func (engine *folderEngine) ProcessFile(path string) {
 
 	_, fileName := returnFileFromPath(path)
 	fmt.Println(fileName)
+	// Skip all files with extension different from .json, csv or .txt
+	extension := filepath.Ext(fileName)
+
+	// Filter files with different extensions
+	if extension != ".json" && extension != ".csv" && extension != ".txt" {
+		fmt.Println("file ignored just extensions json, csv and txt are considered")
+		return
+	}
 
 	present := returnAndCompareAllFiles(fileName, engine.path)
 	if present == true {
@@ -86,7 +99,7 @@ func (engine *folderEngine) ProcessFile(path string) {
 
 		}
 		// Process the file
-		engine.SendFileKafka(engine.path + "/processing/" + fileName)
+		engine.SendFileKafka(engine.path+"/processing/"+fileName, extension)
 
 		// Move the file from processing to completed
 		err := os.Rename(engine.path+"/processing/"+fileName, engine.path+"/completed/"+fileName)
@@ -99,7 +112,7 @@ func (engine *folderEngine) ProcessFile(path string) {
 }
 
 // Read line by line
-func (engine *folderEngine) SendFileKafka(path string) {
+func (engine *folderEngine) SendFileKafka(path string, extension string) {
 
 	file, err := os.Open(path)
 	if err != nil {
@@ -110,6 +123,14 @@ func (engine *folderEngine) SendFileKafka(path string) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
+		if extension == ".json" {
+			engine.kafkaClient.PushJson(context.Background(), []byte(path), []byte(scanner.Text()))
+		} else if extension == ".csv" {
+			engine.kafkaClient.PushCsv(context.Background(), []byte(path), []byte(scanner.Text()))
+		} /*else {
+			engine.kafkaClient.PushTxt(context.Background(), []byte(path), []byte(scanner.Text()))
+		}*/
+
 	}
 
 	if err := scanner.Err(); err != nil {
