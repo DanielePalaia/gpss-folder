@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -35,10 +36,13 @@ func (engine *folderEngine) folderListen() {
 	w.FilterOps(watcher.Create)
 
 	go func() {
+
 		for {
 			select {
 			case event := <-w.Event:
-				fmt.Println(event.Path) // Print the event's info.
+				fmt.Println("New file detected Processing: " + event.Path)
+				go engine.ProcessFile(event.Path)
+
 			case err := <-w.Error:
 				log.Fatalln(err)
 			case <-w.Closed:
@@ -48,7 +52,7 @@ func (engine *folderEngine) folderListen() {
 	}()
 
 	// Watch this folder for changes.
-	if err := w.Add(engine.path); err != nil {
+	if err := w.Add(engine.path + "/staging"); err != nil {
 		log.Fatalln(err)
 	}
 
@@ -65,21 +69,51 @@ func (engine *folderEngine) folderListen() {
 
 }
 
-func createDirectory(dirName string) bool {
-	src, err := os.Stat(dirName)
+func (engine *folderEngine) ProcessFile(path string) {
 
-	if os.IsNotExist(err) {
-		errDir := os.MkdirAll(dirName, 0755)
-		if errDir != nil {
-			panic(err)
+	_, fileName := returnFileFromPath(path)
+	fmt.Println(fileName)
+
+	present := returnAndCompareAllFiles(fileName, engine.path)
+	if present == true {
+		fmt.Println("File: " + path + " already processed and present in completed, files are also equals Skip")
+	} else {
+		fmt.Println("File not yet processed, Processing: " + path)
+		// Copy the file in the processing folder
+		if _, err := copy(path, engine.path+"/processing/"+fileName); err != nil {
+			fmt.Println("error is: ", err.Error())
+			return
+
 		}
-		return true
+		// Process the file
+		engine.SendFileKafka(engine.path + "/processing/" + fileName)
+
+		// Move the file from processing to completed
+		err := os.Rename(engine.path+"/processing/"+fileName, engine.path+"/completed/"+fileName)
+		if err != nil {
+			log.Fatal(err)
+		}
+
 	}
 
-	if src.Mode().IsRegular() {
-		fmt.Println(dirName, "already exist as a file!")
-		return false
+}
+
+// Read line by line
+func (engine *folderEngine) SendFileKafka(path string) {
+
+	file, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
 	}
 
-	return false
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
 }
