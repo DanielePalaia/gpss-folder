@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"time"
 
@@ -94,16 +95,21 @@ func (engine *folderEngine) ProcessFile(path string) {
 	} else {
 		fmt.Println("File not yet processed, Processing: " + path)
 		// Copy the file in the processing folder
-		if _, err := copy(path, engine.path+"/processing/"+fileName); err != nil {
+		/*if _, err := copy(path, engine.path+"/processing/"+fileName); err != nil {
 			fmt.Println("error is: ", err.Error())
 			return
 
+		}*/
+		cpCmd := exec.Command("cp", "-rf", path, engine.path+"/processing/"+fileName)
+		err := cpCmd.Run()
+		if err != nil {
+			fmt.Println("error is: ", err.Error())
 		}
 		// Process the file
 		engine.SendFileKafka(engine.path+"/processing/"+fileName, extension)
 
 		// Move the file from processing to completed
-		err := os.Rename(engine.path+"/processing/"+fileName, engine.path+"/completed/"+fileName)
+		err = os.Rename(engine.path+"/processing/"+fileName, engine.path+"/completed/"+fileName)
 		if err != nil {
 			log.Fatal(err)
 		}
