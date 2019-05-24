@@ -74,6 +74,7 @@ func copy(src, dst string) (int64, error) {
 	defer source.Close()
 
 	destination, err := os.Create(dst)
+	//destination, err := os.OpenFile(dst, syscall.O_CREAT|syscall.O_EXCL, 0666)
 	if err != nil {
 		return 0, err
 	}

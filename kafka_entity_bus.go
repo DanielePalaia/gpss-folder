@@ -40,7 +40,7 @@ func (engine *kafkaEngine) createConnection(topic string) *kafka.Writer {
 	if topic != "" {
 		config := kafka.WriterConfig{
 			Brokers:      engine.kafkaIp,
-			Topic:        engine.topicJson,
+			Topic:        topic,
 			BatchTimeout: 1 * time.Nanosecond,
 		}
 

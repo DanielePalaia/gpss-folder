@@ -46,6 +46,7 @@ func (engine *folderEngine) folderListen() {
 			select {
 			case event := <-w.Event:
 				fmt.Println("New file detected Processing: " + event.Path)
+				time.Sleep(1 * time.Second)
 				go engine.ProcessFile(event.Path)
 
 			case err := <-w.Error:
