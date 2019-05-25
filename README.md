@@ -5,7 +5,8 @@ https://github.com/DanielePalaia/gpss-pipe</br>
 https://github.com/DanielePalaia/gpss-splunk</br>
 https://github.com/DanielePalaia/splunkExternalTables</br>
 </br> </br>
-In this case the connector will listen to a specific directory for new files in .json and .csv format and it will then ingest Greenplum using gpss and gpscli (which is using Kafka as default broker)</br></br>
+In this case the connector will listen to a specific directory for new files in .json and .csv format and it will then ingest Greenplum using gpss and gpscli</br>
+More in detail the software will send .json and .csv entries in two different kafka topics while gpsscli will receive them back and ingest the Greenplum tables as explained here: </br>
 https://gpdb.docs.pivotal.io/5160/greenplum-stream/loading-gpss.html</br>
 https://gpdb.docs.pivotal.io/5160/greenplum-stream/ref/gpsscli.html</br></br>
 
