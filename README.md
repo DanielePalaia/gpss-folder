@@ -72,7 +72,7 @@ KAFKA:</br>
           EXPRESSION: (jdata->>'address')::text</br>
 
    COMMIT:</br>
-     MAX_ROW: 1000</br></br>
+     MAX_ROW: 1000</br>
      
      
 **For .csv** </br>
