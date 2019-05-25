@@ -106,10 +106,28 @@ KAFKA:</br>
 ## Running the software:
 
 ### 1. Configuration file: </br>  
-The software is written in Java. in /target directory in you find the .jar file that can be executed. Also it needs a kafka.properties initialization file.
-Here you must specify the following info regarding the kafka broker </br>   
+The software is written in GO, binaries are already provided in:</br>  
+./bin/macosx/gpss-folder</br>  
+./bin/linux/gpss-folder</br>  
+There is a configuration file to be put at the same folder of the binary: properties.ini with these configurations to specify</br></br>  
+**folder=/Users/dpalaia/foldertest**</br>  
+**kafkaIp=localhost:9092**</br>  
+**topicJson=foldernewjson2**</br>  
+**topicCsv=foldernewcsv5**</br>  </br> 
+Please specify folder, the ip where the kafka broder has been started and the two topics created in the previous step </br>
 
-host:localhost  
-port:9092  
-topic:zzzzz</br>  
+### 2. Simply run the binary: </br> 
+./gpss-folder</br> 
+
+### 3. the program is on hold waiting for files, have look to the folder specified and see that staging, processing and completed folders are created
+
+### 4. Provide files in staging
+Provide the sample files provided in ./test in the staging directories (even in parallel)
+
+### 5. Some logs entries will be diplayed in the consolle (NB to remove them for performance in the future)
+
+### 6. Stop the 2 gpsscli jobs when you want to finalize the writing (software will continue to send to kafka broker).
+
+### 6. Do some experiment on the files, maybe change tables or gpsscli mapping.
+
 
