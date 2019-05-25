@@ -13,7 +13,7 @@ https://gpdb.docs.pivotal.io/5160/greenplum-stream/ref/gpsscli.html</br></br>
 ## Summary
 The connector is highly multithreaded, using all the potentiality of goroutines </br>
 https://golangbot.com/goroutines/ </br>
-This translate to be able to load several files at the same time with very minimal overhead </br></br>
+This translate to be able to process several files at the same time with minimal overhead </br></br>
 Once started on a given directory the software will create inside it three subdirectories: </br></br>
 **staging** </br>
 **processing** </br>
