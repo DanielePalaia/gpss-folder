@@ -108,7 +108,7 @@ KAFKA:</br>
 ### 1. Configuration file: </br>  
 The software is written in GO, binaries are already provided in:</br>  
 ./bin/macosx/gpss-folder  
-./bin/linux/gpss-folder</br>  
+./bin/linux/gpss-folder  
 There is a configuration file to be put at the same folder of the binary: properties.ini with these configurations to specify</br></br>  
 **folder=/Users/dpalaia/foldertest**  
 **kafkaIp=localhost:9092**  
