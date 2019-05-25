@@ -13,10 +13,10 @@ https://gpdb.docs.pivotal.io/5160/greenplum-stream/ref/gpsscli.html</br></br>
 The connector is highly multithreaded, using all the potentiality of Go routines </br></br>
 https://golangbot.com/goroutines/ </br>
 This translate to be able to load several files at the same time with very minimal overhead </br></br>
-Once started on a given directory the software will create inside it three subdirectories: </br>
+Once started on a given directory the software will create inside it three subdirectories: </br></br>
 **staging** </br>
 **processing** </br>
-**completed** </br>
+**completed** </br></br>
 Files are expected to be provided inside staging (even several in parallel) </br>
 Once landed the software will copy the files inside processing </br>
 it will then read line by line and send the result to a kafka topic (based on the extension .json or .csv) </br>
