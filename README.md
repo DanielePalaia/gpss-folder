@@ -113,7 +113,7 @@ There is a configuration file to be put at the same folder of the binary: proper
 **folder=/Users/dpalaia/foldertest**  
 **kafkaIp=localhost:9092**  
 **topicJson=foldernewjson2**  
-**topicCsv=foldernewcsv5** 
+**topicCsv=foldernewcsv5** </br>
 Please specify folder, the ip where the kafka broder has been started and the two topics created in the previous step </br>
 
 ### 2. Simply run the binary: </br> 
