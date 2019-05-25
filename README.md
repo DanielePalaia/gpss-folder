@@ -128,6 +128,6 @@ Provide the sample files provided in ./test in the staging directories (even in 
 
 ### 6. Stop the 2 gpsscli jobs when you want to finalize the writing (software will continue to send to kafka broker).
 
-### 6. Do some experiment on the files, maybe change tables or gpsscli mapping.
+### 7. Do some experiment on the files, maybe change tables or gpsscli mapping.
 
 
