@@ -33,9 +33,9 @@ This software is using gpsscli to ingest Greenplum tables which is using Kafka a
 
 ### 2. Create a Greenplum database, and create two sample tables to be ingested
 Create 2 tables to be ingested based on what you have in your input data. </br>
-In this sample we will use these two ones:</br>
-create table personJson(id int, name text, surname text, email text, address text); </br>
-create table personCsv(id int, name text, surname text, email text, address text); </br>
+In this sample we will use these two ones:</br></br>
+**create table personJson(id int, name text, surname text, email text, address text);** </br>
+**create table personCsv(id int, name text, surname text, email text, address text);** </br></br>
 Take also in mind that gpsscli will allow you to do some filtering as we will see afterwards </br>
 
 ### 3. Enable GPSS and create two gpsscli job
