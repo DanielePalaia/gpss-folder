@@ -1,9 +1,9 @@
 ## Introduction
-This software is part of the set of GPSS connectors developed by the Pivotal PDE EMEA team to test Pivotal Greenplum on several streaming scenarios. It continues the prototypes started here (for reference and better understanding): 
-https://github.com/DanielePalaia/gpss-rabbit-greenplum-connector
-https://github.com/DanielePalaia/gpss-pipe
-https://github.com/DanielePalaia/gpss-splunk
-https://github.com/DanielePalaia/splunkExternalTables
+This software is part of the set of GPSS connectors developed by the Pivotal PDE EMEA team to test Pivotal Greenplum on several streaming scenarios. It continues the prototypes started here (for reference and better understanding): </br>
+https://github.com/DanielePalaia/gpss-rabbit-greenplum-connector</br>
+https://github.com/DanielePalaia/gpss-pipe</br>
+https://github.com/DanielePalaia/gpss-splunk</br>
+https://github.com/DanielePalaia/splunkExternalTables</br>
 </br> </br>
 In this case the connector will listen to a specific directory for new files in .json and .csv format and it will then ingest Greenplum using gpss and gpscli (which is using Kafka as default broker)</br>
 https://gpdb.docs.pivotal.io/5160/greenplum-stream/loading-gpss.html</br>
