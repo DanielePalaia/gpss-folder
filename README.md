@@ -110,10 +110,10 @@ The software is written in GO, binaries are already provided in:</br>
 ./bin/macosx/gpss-folder  
 ./bin/linux/gpss-folder</br>  
 There is a configuration file to be put at the same folder of the binary: properties.ini with these configurations to specify</br></br>  
-**folder=/Users/dpalaia/foldertest**</br>  
-**kafkaIp=localhost:9092**</br>  
-**topicJson=foldernewjson2**</br>  
-**topicCsv=foldernewcsv5**</br>  </br> 
+**folder=/Users/dpalaia/foldertest**  
+**kafkaIp=localhost:9092**  
+**topicJson=foldernewjson2**  
+**topicCsv=foldernewcsv5** 
 Please specify folder, the ip where the kafka broder has been started and the two topics created in the previous step </br>
 
 ### 2. Simply run the binary: </br> 
