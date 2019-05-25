@@ -135,6 +135,6 @@ Provide the sample files provided in ./test in the staging directories (even in 
 If you which to compile and modify the software you must install the Go compiler.</br>
 Afterward gitclone this repo in your $GOHOME/src directory.
 This software is using to external libraries to directory listening and kafka operations, so please do a </br>
-**go get github.com/radovskyb/watcher**
-**go get github.com/segmentio/kafka-go**
+go get github.com/radovskyb/watcher</br>
+go get github.com/segmentio/kafka-go</br>
 After that a go build should be enough to create a binary file.
