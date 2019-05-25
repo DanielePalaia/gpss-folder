@@ -1,5 +1,5 @@
 ## Introduction
-This software is part of the set of GPSS connectors developed by the Pivotal PDE EMEA team to test Pivotal Greenplum on several streaming scenarios. It continues the prototypes started here (for reference and better understanding): </br>
+This software is part of the set of GPSS connectors developed by the Pivotal PDE EMEA team to test Pivotal Greenplum on several streaming scenarios. It continues the prototypes started here (for reference and better understanding): </br></br>
 https://github.com/DanielePalaia/gpss-rabbit-greenplum-connector</br>
 https://github.com/DanielePalaia/gpss-pipe</br>
 https://github.com/DanielePalaia/gpss-splunk</br>
